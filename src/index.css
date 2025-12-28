@@ -760,3 +760,90 @@ body {
     gap: 1.6rem;
   }
 }
+
+/* ================= MOBILE NAVBAR ================= */
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: fixed;
+    top: 64px;
+    right: 0;
+
+    width: 100%;
+    max-width: 320px;
+    height: calc(100vh - 64px);
+
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.8rem;
+
+    padding: 2rem;
+
+    background: rgba(5, 5, 5, 0.95);
+    backdrop-filter: blur(12px);
+
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+  }
+
+  .nav-links.open {
+    transform: translateX(0);
+  }
+
+  .nav-links li {
+    font-size: 1.05rem;
+  }
+}
+
+/* ================= EXTRA SMALL DEVICES ================= */
+
+@media (max-width: 480px) {
+  .content-section {
+    padding: 3.2rem 1.2rem;
+  }
+
+  .generated-name {
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .generated-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    gap: 2rem;
+  }
+
+  .about-left h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-left p {
+    font-size: 0.95rem;
+  }
+
+  .profile-image {
+    width: 260px;
+    height: 340px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links li,
+  .resume-button,
+  .project-link {
+    padding: 0.6rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-list,
+  .contact-grid,
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
