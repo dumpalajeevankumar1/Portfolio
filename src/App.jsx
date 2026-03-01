@@ -19,7 +19,13 @@ export default function App() {
       profileRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 600);
   };
+const [copied, setCopied] = useState(false);
 
+const copyEmail = () => {
+  navigator.clipboard.writeText("jeevankumar082005@gmail.com");
+  setCopied(true);
+  setTimeout(() => setCopied(false), 2000);
+};
   return (
     <main>
       {/* MATRIX BACKGROUND */}
@@ -35,8 +41,8 @@ export default function App() {
 
           {showSubtitle && (
             <GeneratedName
-              text="TECH ENTHUSIAST"
-              speed={60}
+              text="AI-FOCUSED FULL-STACK PRODUCT DEVELOPER"
+              speed={50}
               isSubtitle
               onDone={handleIntroComplete}
             />
@@ -44,335 +50,245 @@ export default function App() {
         </div>
       </section>
 
+      {/* ================= NAVBAR ================= */}
+      <nav className="navbar">
+        <div className="nav-inner">
+          {/* Brand */}
+          <div
+            className="nav-logo"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
+            <span className="logo-primary">portfolio</span>
+            <span className="logo-sub">systems · data · ai</span>
+          </div>
 
-    {/* ================= NAVBAR ================= */}
-<nav className="navbar">
-  <div className="nav-inner">
-    {/* Brand */}
-    <div
-      className="nav-logo"
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-    >
-      <span className="logo-primary">portfolio</span>
-      <span className="logo-sub">systems · data · ai</span>
-    </div>
+          {/* Navigation */}
+          <ul className="nav-links">
+            <li onClick={() => profileRef.current?.scrollIntoView({ behavior: "smooth" })}>
+              About
+            </li>
+            <li onClick={() => experienceRef.current?.scrollIntoView({ behavior: "smooth" })}>
+              Experience
+            </li>
+            <li onClick={() => skillsRef.current?.scrollIntoView({ behavior: "smooth" })}>
+              Stack
+            </li>
+            <li onClick={() => projectsRef.current?.scrollIntoView({ behavior: "smooth" })}>
+              Projects
+            </li>
+            <li
+              className="nav-cta"
+              onClick={() => contactRef.current?.scrollIntoView({ behavior: "smooth" })}
+            >
+              Contact
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-    {/* Navigation */}
-    <ul className="nav-links">
-      <li onClick={() => profileRef.current?.scrollIntoView({ behavior: "smooth" })}>
-        About
-      </li>
-      <li onClick={() => experienceRef.current?.scrollIntoView({ behavior: "smooth" })}>
-        Experience
-      </li>
-      <li onClick={() => skillsRef.current?.scrollIntoView({ behavior: "smooth" })}>
-        Skills
-      </li>
-      <li onClick={() => projectsRef.current?.scrollIntoView({ behavior: "smooth" })}>
-        Projects
-      </li>
-      <li
-        className="nav-cta"
-        onClick={() => contactRef.current?.scrollIntoView({ behavior: "smooth" })}
-      >
-        Contact
-      </li>
-    </ul>
-  </div>
-</nav>
+      {/* ================= ABOUT ================= */}
+      <section ref={profileRef} className="content-section about-section">
+        <div className="about-left">
+          <h2>About</h2>
 
+          <p className="about-lead">
+            I approach software as an engineered system — not just a collection of features.
+          </p>
 
+          <p>
+            As a final-year AI & ML student and full-stack developer, I build scalable web products 
+            with clearly structured client–server architecture, secure backend logic, and AI-driven enhancements.
+          </p>
 
-    {/* ================= ABOUT ================= */}
-    <section ref={profileRef} className="content-section about-section">
-      <div className="about-left">
-        <h2>About</h2>
+          <p>
+            Working across React, Node.js, Django, and Firebase, I integrate real-time data systems, 
+            LLM APIs, and authentication workflows into production-oriented applications 
+            designed for clarity, reliability, and growth.
+          </p>
+        </div>
 
-        <p>
-          I am a Computer Science undergraduate specializing in Artificial
-          Intelligence and Machine Learning, driven by a deep curiosity about how
-          software systems actually work in the real world. I enjoy exploring
-          problems beyond surface-level solutions—understanding why systems behave
-          the way they do, where they fail, and how they can be improved.
-        </p>
+        <div className="about-right">
+          <img
+            src="/profile.jpg"
+            alt="Dumpala Jeevan Kumar"
+            className="profile-image"
+          />
+        </div>
+      </section>
 
-        <p>
-          My experience spans full-stack development, data-driven applications, and
-          system-oriented projects, where I have worked with technologies such as
-          Python, Django, JavaScript, cloud APIs, and modern web architectures. I
-          have built dashboards, integrated external data sources, and experimented
-          with real-time and AI-powered components, focusing on clean architecture,
-          logical data flow, and performance considerations.
-        </p>
-      </div>
-
-      <div className="about-right">
-        <img
-          src="/profile.jpg"
-          alt="Profile"
-          className="profile-image"
-        />
-      </div>
-    </section>
-
-
-
-      {/* ================= LEARNING & EXPERIENCE ================= */}
+      {/* ================= PROFESSIONAL EXPERIENCE ================= */}
       <section ref={experienceRef} className="content-section experience-section">
-        <h2>Learning & Experience</h2>
+        <h2>Professional Experience</h2>
 
         <div className="experience-list">
           <div className="experience-item">
-            <h3>Full-Stack Application Development</h3>
+            <div className="exp-header">
+              <h3>Inteleforge Limited — Full-Stack Developer Intern</h3>
+              <span className="exp-date">Jan 2026 – Present</span>
+            </div>
             <p>
-              Built complete web applications using Django and JavaScript, handling
-              frontend logic, backend processing, and database interactions with a
-              focus on clarity and maintainability.
+              Contributed to end-to-end product development and deployment pipelines. 
+              Designed scalable client–server architecture using React & Node.js, 
+              implemented secure authentication, and integrated AI-powered workflows into production systems.
             </p>
           </div>
 
           <div className="experience-item">
-            <h3>Backend APIs & Cloud Integration</h3>
+            <div className="exp-header">
+              <h3>Matrimony in India — Freelance Full-Stack Developer</h3>
+              <span className="exp-date">Mar 2025 – Jan 2026</span>
+            </div>
             <p>
-              Designed RESTful APIs and integrated cloud-based services, learning how
-              data flows between systems and how backend decisions impact performance
-              and scalability.
-            </p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Data-Driven Dashboards</h3>
-            <p>
-              Worked on dashboards that consume and visualize structured data,
-              emphasizing meaningful insights, clean UI structure, and efficient data
-              handling.
-            </p>
-          </div>
-
-          <div className="experience-item">
-            <h3>AI / ML Exploration</h3>
-            <p>
-              Experimented with AI and machine-learning components to understand how
-              intelligent features can enhance applications, focusing on practical
-              use cases rather than theoretical models.
-            </p>
-          </div>
-
-          <div className="experience-item">
-            <h3>Production-Oriented Iteration</h3>
-            <p>
-              Approached projects with a production mindset by iterating on designs,
-              improving reliability, fixing edge cases, and learning from failures to
-              refine system behavior.
+              Developed and maintained full-stack web application features and improved 
+              search visibility through technical SEO implementation. Enhanced 
+              performance and API responsiveness for high-traffic environments.
             </p>
           </div>
         </div>
       </section>
 
-
-      {/* ================= SERVICES ================= */}
-      {/* ================= SERVICES ================= */}
+      {/* ================= WHAT I BUILD (SERVICES) ================= */}
       <section ref={servicesRef} className="content-section services-section">
-        <h2>What I Do</h2>
+        <h2>What I Build</h2>
 
         <div className="services-grid">
           <div className="service-card">
-            <h3>Full-Stack Web Development</h3>
+            <h3>Scalable Web Applications</h3>
             <p>
-              Design and build end-to-end web applications with a clear separation
-              between frontend, backend, and data layers, focusing on maintainable
-              and scalable architecture.
+              Architect full-stack systems with clear separation between frontend, 
+              backend, and database layers for maximum maintainability.
             </p>
           </div>
 
           <div className="service-card">
-            <h3>Backend APIs & System Design</h3>
+            <h3>Secure Backend Systems</h3>
             <p>
-              Develop RESTful APIs, define data contracts, and structure backend
-              systems that support clean data flow, extensibility, and reliability.
+              Design RESTful services with authentication flows, structured APIs, 
+              and clean business logic.
             </p>
           </div>
 
           <div className="service-card">
-            <h3>Data Dashboards & Integrations</h3>
+            <h3>Data-Driven Dashboards</h3>
             <p>
-              Build data-driven dashboards and integrate external APIs to visualize,
-              process, and monitor real-time or historical information.
+              Develop dashboards that process and visualize real-time and structured 
+              datasets for actionable insights.
             </p>
           </div>
 
           <div className="service-card">
-            <h3>AI-Assisted Features</h3>
+            <h3>AI-Integrated Products</h3>
             <p>
-              Experiment with machine-learning-powered components such as basic
-              predictions, intelligent data processing, and decision-support
-              features.
+              Integrate LLMs (ChatGPT, Gemini, Vertex AI) to build intelligent 
+              automation, analysis, and decision-support systems.
             </p>
           </div>
 
           <div className="service-card">
-            <h3>Cloud & Deployment Basics</h3>
+            <h3>Cloud & Deployment</h3>
             <p>
-              Configure cloud-based backends, authentication flows, and deployment
-              pipelines with an understanding of performance, security, and
-              scalability constraints.
+              Configure Firebase backends, API integrations, and scalable 
+              deployment workflows for production readiness.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ================= SKILLS ================= */}
-      {/* ================= SKILLS ================= */}
+      {/* ================= TECHNICAL STACK ================= */}
       <section ref={skillsRef} className="content-section skills-section">
-        <h2>Skills</h2>
+        <h2>Technical Stack</h2>
 
         <div className="skills-grid">
-          {/* Web */}
           <div className="skills-card">
             <h3>Web Development</h3>
             <div className="skills-items">
-              <span>HTML</span>
-              <span>CSS</span>
-              <span>JavaScript</span>
-              <span>React (Basic)</span>
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+              <span>React.js</span><span>TypeScript</span>
             </div>
           </div>
 
-          {/* Backend */}
           <div className="skills-card">
-            <h3>Backend & Databases</h3>
+            <h3>Backend & APIs</h3>
             <div className="skills-items">
-              <span>Firebase</span>
-              <span>API Integration</span>
-              <span>NoSQL Basics</span>
+              <span>Django</span><span>Node.js</span><span>Express.js</span>
+              <span>Firebase</span><span>REST API Design</span>
             </div>
           </div>
 
-          {/* Programming */}
           <div className="skills-card">
-            <h3>Programming</h3>
+            <h3>AI & Generative AI</h3>
             <div className="skills-items">
-              <span>Python</span>
-              <span>Scripting</span>
-              <span>Data Handling</span>
+              <span>OpenAI (ChatGPT)</span><span>Google Gemini API</span>
+              <span>Vertex AI</span><span>Prompt Engineering</span>
             </div>
           </div>
 
-          {/* Architecture */}
           <div className="skills-card">
-            <h3>Architecture & DevOps</h3>
+            <h3>Architecture & Tools</h3>
             <div className="skills-items">
-              <span>Client–Server</span>
-              <span>REST APIs</span>
-              <span>Git</span>
-              <span>GitHub</span>
+              <span>Client–Server</span><span>Git</span><span>GitHub</span>
+              <span>Cursor AI</span><span>GitHub Copilot</span><span>Supabase</span>
             </div>
           </div>
 
-          {/* Security */}
           <div className="skills-card">
-            <h3>Security & Tools</h3>
+            <h3>Security</h3>
             <div className="skills-items">
-              <span>OWASP Basics</span>
-              <span>Auth Flows</span>
-              <span>Debugging</span>
+              <span>OWASP Principles</span><span>Auth Flows</span><span>API Security</span>
             </div>
           </div>
         </div>
       </section>
 
-
-      {/* ================= ENGINEERING FOCUS ================= */}
       {/* ================= ENGINEERING FOCUS ================= */}
       <section ref={focusRef} className="content-section focus-section">
-        <h2>Engineering Focus</h2>
+        <h2>Engineering Principles</h2>
 
         <div className="focus-grid">
           <div className="focus-card">
-            <h3>Clean & Intentional Architecture</h3>
-            <p>
-              I prioritize clear separation of concerns and readable system
-              structure, ensuring that codebases remain understandable, maintainable,
-              and extensible as they grow.
-            </p>
+            <h3>Clean Architecture</h3>
+            <p>Prioritizing intentional system structure and readable, maintainable codebases.</p>
           </div>
-
           <div className="focus-card">
-            <h3>Logical Data Flow</h3>
-            <p>
-              I design systems with predictable data movement, focusing on how
-              information enters, transforms, and exits the system to reduce bugs and
-              improve clarity.
-            </p>
+            <h3>Predictable Data Flow</h3>
+            <p>Designing systems with logical data movement to reduce complexity and bugs.</p>
           </div>
-
           <div className="focus-card">
-            <h3>Scalability & Performance Awareness</h3>
-            <p>
-              While building features, I consider performance implications and
-              scalability constraints early, aiming to avoid architectural bottlenecks
-              and unnecessary complexity.
-            </p>
+            <h3>Scalability-Aware Design</h3>
+            <p>Considering performance constraints early to avoid architectural bottlenecks.</p>
           </div>
-
           <div className="focus-card">
-            <h3>Security-Conscious Design</h3>
-            <p>
-              I follow security-aware development practices such as basic OWASP
-              principles, authentication flows, and safe handling of user input to
-              minimize common vulnerabilities.
-            </p>
+            <h3>Security-Conscious</h3>
+            <p>Implementing safe user input handling and secure authentication flows by default.</p>
           </div>
-
           <div className="focus-card">
-            <h3>Real-World Reliability</h3>
-            <p>
-              I focus on building systems that behave predictably under real-world
-              conditions by handling edge cases, failures, and iterative improvements
-              rather than assuming ideal scenarios.
-            </p>
+            <h3>Production-Oriented</h3>
+            <p>Iterating on real-world reliability rather than assuming ideal scenarios.</p>
           </div>
         </div>
       </section>
 
-
-      {/* ================= PROJECTS ================= */}
       {/* ================= PROJECTS ================= */}
       <section ref={projectsRef} className="content-section projects-section">
         <h2>Projects</h2>
-
-        <p className="projects-intro">
-          A selection of system-oriented projects focused on real-world problems,
-          combining backend architecture, data integration, and intelligent features.
-        </p>
-
         <div className="projects-list">
           {/* Project 1 */}
           <div className="project-card">
             <div className="project-header">
               <h3>Accd Bazaar</h3>
-              <span className="project-tag">Full-Stack Platform</span>
+              <span className="project-tag">Full-Stack Product</span>
             </div>
-
             <p className="project-desc">
-              A circular marketplace for buying and selling pre-owned goods, designed
-              with a dynamic UI and a REST-based backend to support scalable product
-              listings and user interactions.
+              A scalable circular marketplace platform supporting dynamic listings 
+              and structured user interactions.
             </p>
-
             <ul className="project-points">
-              <li>Designed Django models and REST APIs for core business logic</li>
-              <li>Implemented dynamic frontend using HTML, CSS, Bootstrap, and JavaScript</li>
-              <li>Used SQLite for structured data storage during development</li>
+              <li>Designed backend models and REST APIs for business logic</li>
+              <li>Implemented responsive frontend using React and modern UI practices</li>
+              <li>Structured client-server data flow for scalability</li>
             </ul>
-
-            <a
-              href="https://github.com/dumpalajeevankumar1/Web-application"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link"
-            >
-              View on GitHub →
+            <a href="https://github.com/dumpalajeevankumar1/Web-application" target="_blank" rel="noopener noreferrer" className="project-link">
+              GitHub →
             </a>
           </div>
 
@@ -380,28 +296,19 @@ export default function App() {
           <div className="project-card">
             <div className="project-header">
               <h3>City Intelligence Dashboard</h3>
-              <span className="project-tag">Real-Time Analytics</span>
+              <span className="project-tag">Google Hackathon Finalist</span>
             </div>
-
             <p className="project-desc">
-              A real-time civic analytics dashboard for traffic monitoring and incident
-              reporting, developed as part of a hackathon and selected as a Google
-              Hackathon Finalist.
+              A real-time civic intelligence system for monitoring traffic and incidents 
+              via geospatial insights.
             </p>
-
             <ul className="project-points">
-              <li>Integrated live data using Firebase for real-time updates</li>
-              <li>Visualized location-based insights using Google Maps API</li>
-              <li>Focused on real-world usability and fast data refresh cycles</li>
+              <li>Integrated Firebase for real-time updates</li>
+              <li>Implemented Google Maps API for geospatial insights</li>
+              <li>Designed rapid data-refresh architecture</li>
             </ul>
-
-            <a
-              href="https://github.com/dumpalajeevankumar1/scamps"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link"
-            >
-              View on GitHub →
+            <a href="https://github.com/dumpalajeevankumar1/scamps" target="_blank" rel="noopener noreferrer" className="project-link">
+              GitHub →
             </a>
           </div>
 
@@ -409,94 +316,67 @@ export default function App() {
           <div className="project-card">
             <div className="project-header">
               <h3>AgroMind</h3>
-              <span className="project-tag">IoT & AI System</span>
+              <span className="project-tag">IoT + AI System</span>
             </div>
-
             <p className="project-desc">
-              An IoT-based smart farming system that collects environmental data from
-              sensors and applies AI-based analysis to generate actionable farming
-              insights.
+              An AI-enhanced smart farming system collecting sensor data and generating 
+              automated agricultural recommendations.
             </p>
-
             <ul className="project-points">
-              <li>Collected real-time sensor data using ESP8266 and environmental sensors</li>
-              <li>Processed and analyzed data using cloud-based Gemini AI API</li>
-              <li>Delivered intelligent recommendations based on environmental patterns</li>
+              <li>Collected IoT sensor data using ESP8266</li>
+              <li>Processed data with Gemini AI API</li>
+              <li>Generated automated agricultural recommendations</li>
             </ul>
-
-            <a
-              href="https://github.com/dumpalajeevankumar1/agromind"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-link"
-            >
-              View on GitHub →
+            <a href="https://github.com/dumpalajeevankumar1/agromind" target="_blank" rel="noopener noreferrer" className="project-link">
+              GitHub →
             </a>
           </div>
         </div>
       </section>
 
-
-      {/* ================= RESUME ================= */}
       {/* ================= RESUME ================= */}
       <section ref={resumeRef} className="content-section resume-section">
         <div className="resume-box">
           <h2>Resume</h2>
-
           <p className="resume-text">
-            A concise overview of my academic background, technical skills, and
-            hands-on engineering experience, highlighting system-oriented projects,
-            problem-solving approach, and learning progression.
+            A concise overview of my academic background, technical skills, and 
+            hands-on engineering experience in full-stack and AI systems.
           </p>
-
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="resume-button"
-          >
+          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="resume-button">
             Download Resume
           </a>
         </div>
       </section>
 
-
-      {/* ================= CONTACT / HIRE ME ================= */}
-      <section ref={contactRef} className="content-section contact-section">
+      {/* ================= CONTACT ================= */}
+        <section ref={contactRef} className="content-section contact-section">
         <h2>Let’s Connect</h2>
-
-        <p className="contact-intro">
-          I am open to software development and full-stack internship opportunities
-          where I can contribute to real-world systems, learn from experienced
-          engineers, and grow through meaningful challenges.
-        </p>
-
         <div className="contact-grid">
           <div className="contact-card">
             <h3>Contact</h3>
+            
+            {/* Standard Mailto Link */}
             <p>
               <strong>Email:</strong>{" "}
-              <a href="mailto:jeevankumar082005@gmail.com">
+              <a 
+                href="mailto:jeevankumar082005@gmail.com"
+                className="email-link"
+                title="Open in mail app"
+              >
                 jeevankumar082005@gmail.com
               </a>
             </p>
+
             <p>
               <strong>GitHub:</strong>{" "}
-              <a
-                href="https://github.com/dumpalajeevankumar1"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://github.com/dumpalajeevankumar1" target="_blank" rel="noopener noreferrer">
                 github.com/dumpalajeevankumar1
               </a>
             </p>
+            
             <p>
               <strong>LinkedIn:</strong>{" "}
-              <a
-                href="https://www.linkedin.com/in/jeevankumar-465a85324/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://www.linkedin.com/in/jeevankumar-465a85324/" target="_blank" rel="noopener noreferrer">
                 linkedin.com/in/jeevankumar
               </a>
             </p>
@@ -505,18 +385,13 @@ export default function App() {
           <div className="contact-card highlight">
             <h3>Hire Me</h3>
             <p>
-              I am seeking opportunities as a <strong>Software Developer</strong> or
-              <strong> Full-Stack Intern</strong>, with interests in backend systems,
-              data-driven applications, and intelligent features.
-            </p>
-            <p>
-              I value clean architecture, reliability, and learning through real
-              production challenges.
+              I am seeking opportunities as a <strong>Software Developer</strong> or 
+              <strong> Full-Stack Intern</strong>, focusing on backend systems and 
+              AI product development.
             </p>
           </div>
         </div>
       </section>
-
     </main>
   );
 }
