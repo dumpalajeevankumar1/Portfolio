@@ -109,7 +109,7 @@ const copyEmail = () => {
 
         <div className="about-right">
           <img
-            src="/profile.jpg"
+            src="/profile.jpeg"
             alt="Dumpala Jeevan Kumar"
             className="profile-image"
           />
