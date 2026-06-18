@@ -4,14 +4,16 @@ import GeneratedName from "./components/GeneratedName";
 
 export default function App() {
   const [showSubtitle, setShowSubtitle] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
 
+  // Section Refs
   const profileRef = useRef(null);
+  const experienceRef = useRef(null);
   const servicesRef = useRef(null);
   const skillsRef = useRef(null);
-  const experienceRef = useRef(null);
   const focusRef = useRef(null);
   const projectsRef = useRef(null);
-  const resumeRef = useRef(null);
   const contactRef = useRef(null);
 
   const handleIntroComplete = () => {
@@ -19,13 +21,18 @@ export default function App() {
       profileRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 600);
   };
-const [copied, setCopied] = useState(false);
 
-const copyEmail = () => {
-  navigator.clipboard.writeText("jeevankumar082005@gmail.com");
-  setCopied(true);
-  setTimeout(() => setCopied(false), 2000);
-};
+  const copyEmail = () => {
+    navigator.clipboard.writeText("jeevankumar082005@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+    setIsMobileMenuOpen(false); // Close mobile menu on click
+  };
+
   return (
     <main>
       {/* MATRIX BACKGROUND */}
@@ -56,30 +63,31 @@ const copyEmail = () => {
           {/* Brand */}
           <div
             className="nav-logo"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              setIsMobileMenuOpen(false);
+            }}
           >
             <span className="logo-primary">portfolio</span>
             <span className="logo-sub">systems · data · ai</span>
           </div>
 
-          {/* Navigation */}
-          <ul className="nav-links">
-            <li onClick={() => profileRef.current?.scrollIntoView({ behavior: "smooth" })}>
-              About
-            </li>
-            <li onClick={() => experienceRef.current?.scrollIntoView({ behavior: "smooth" })}>
-              Experience
-            </li>
-            <li onClick={() => skillsRef.current?.scrollIntoView({ behavior: "smooth" })}>
-              Stack
-            </li>
-            <li onClick={() => projectsRef.current?.scrollIntoView({ behavior: "smooth" })}>
-              Projects
-            </li>
-            <li
-              className="nav-cta"
-              onClick={() => contactRef.current?.scrollIntoView({ behavior: "smooth" })}
-            >
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle Navigation"
+          >
+            {isMobileMenuOpen ? "✕" : "☰"}
+          </button>
+
+          {/* Navigation Links */}
+          <ul className={`nav-links ${isMobileMenuOpen ? "nav-links-mobile-open" : ""}`}>
+            <li onClick={() => scrollToSection(profileRef)}>About</li>
+            <li onClick={() => scrollToSection(experienceRef)}>Experience</li>
+            <li onClick={() => scrollToSection(skillsRef)}>Stack</li>
+            <li onClick={() => scrollToSection(projectsRef)}>Projects</li>
+            <li className="nav-cta" onClick={() => scrollToSection(contactRef)}>
               Contact
             </li>
           </ul>
@@ -92,18 +100,15 @@ const copyEmail = () => {
           <h2>About</h2>
 
           <p className="about-lead">
-            I approach software as an engineered system — not just a collection of features.
+            I am a developer who enjoys building products from the ground up, approaching software as an engineered system rather than just a collection of features.
           </p>
 
           <p>
-            As a final-year AI & ML student and full-stack developer, I build scalable web products 
-            with clearly structured client–server architecture, secure backend logic, and AI-driven enhancements.
+            As a final-year AI & ML student and full-stack developer, I build scalable web products with clearly structured client–server architecture, secure backend logic, and AI-driven enhancements. I handle everything from technical architecture and cloud deployment to product development and ongoing maintenance.
           </p>
 
           <p>
-            Working across React, Node.js, Django, and Firebase, I integrate real-time data systems, 
-            LLM APIs, and authentication workflows into production-oriented applications 
-            designed for clarity, reliability, and growth.
+            Working across React, Node.js, Django, and PostgreSQL, I integrate real-time data systems, LLM APIs, and authentication workflows into production-oriented applications designed for clarity, reliability, and business growth. I am always eager to learn new technologies and solve practical business problems through software.
           </p>
         </div>
 
@@ -127,21 +132,27 @@ const copyEmail = () => {
               <span className="exp-date">Jan 2026 – Present</span>
             </div>
             <p>
-              Contributed to end-to-end product development and deployment pipelines. 
-              Designed scalable client–server architecture using React & Node.js, 
-              implemented secure authentication, and integrated AI-powered workflows into production systems.
+              Contributed to end-to-end product development and deployment pipelines. Designed scalable client–server architecture using React & Node.js, implemented secure authentication, and integrated AI-powered workflows into production systems.
             </p>
           </div>
 
           <div className="experience-item">
             <div className="exp-header">
-              <h3>Matrimony in India — Freelance Full-Stack Developer</h3>
-              <span className="exp-date">Mar 2025 – Jan 2026</span>
+              <h3>Noreatrix Technologies — Founder & Lead Engineer</h3>
+              <span className="exp-date">2026 – Present</span>
             </div>
             <p>
-              Developed and maintained full-stack web application features and improved 
-              search visibility through technical SEO implementation. Enhanced 
-              performance and API responsiveness for high-traffic environments.
+              Leading technical strategy and product development for proprietary tools like NoreaTools. Managing full-stack architecture, deployment on modern cloud infrastructure, and overseeing business operations, branding, and local SEO optimizations.
+            </p>
+          </div>
+
+          <div className="experience-item">
+            <div className="exp-header">
+              <h3>Freelance Developer — Client Solutions</h3>
+              <span className="exp-date">Mar 2025 – Present</span>
+            </div>
+            <p>
+              Developed, deployed, and currently maintain production applications like <strong>The SBK Dance</strong> from the ground up. Architected and delivered several real-world projects under NDA client agreements, focusing on system architecture, performance optimization, and search visibility.
             </p>
           </div>
         </div>
@@ -154,42 +165,22 @@ const copyEmail = () => {
         <div className="services-grid">
           <div className="service-card">
             <h3>Scalable Web Applications</h3>
-            <p>
-              Architect full-stack systems with clear separation between frontend, 
-              backend, and database layers for maximum maintainability.
-            </p>
+            <p>Architect full-stack systems with clear separation between frontend, backend, and database layers for maximum maintainability.</p>
           </div>
 
           <div className="service-card">
             <h3>Secure Backend Systems</h3>
-            <p>
-              Design RESTful services with authentication flows, structured APIs, 
-              and clean business logic.
-            </p>
+            <p>Design RESTful services with authentication flows, structured APIs, and clean business logic.</p>
           </div>
 
           <div className="service-card">
-            <h3>Data-Driven Dashboards</h3>
-            <p>
-              Develop dashboards that process and visualize real-time and structured 
-              datasets for actionable insights.
-            </p>
+            <h3>End-to-End Product Development</h3>
+            <p>Drive projects from initial wireframes to database schema design, continuous deployment, and post-launch maintenance.</p>
           </div>
 
           <div className="service-card">
             <h3>AI-Integrated Products</h3>
-            <p>
-              Integrate LLMs (ChatGPT, Gemini, Vertex AI) to build intelligent 
-              automation, analysis, and decision-support systems.
-            </p>
-          </div>
-
-          <div className="service-card">
-            <h3>Cloud & Deployment</h3>
-            <p>
-              Configure Firebase backends, API integrations, and scalable 
-              deployment workflows for production readiness.
-            </p>
+            <p>Integrate LLMs (ChatGPT, Gemini, Vertex AI) to build intelligent automation, analysis, and decision-support systems.</p>
           </div>
         </div>
       </section>
@@ -202,16 +193,16 @@ const copyEmail = () => {
           <div className="skills-card">
             <h3>Web Development</h3>
             <div className="skills-items">
-              <span>HTML</span><span>CSS</span><span>JavaScript</span>
-              <span>React.js</span><span>TypeScript</span>
+              <span>React.js</span><span>Next.js</span><span>TypeScript</span>
+              <span>JavaScript</span><span>HTML/CSS</span>
             </div>
           </div>
 
           <div className="skills-card">
-            <h3>Backend & APIs</h3>
+            <h3>Backend & Data</h3>
             <div className="skills-items">
-              <span>Django</span><span>Node.js</span><span>Express.js</span>
-              <span>Firebase</span><span>REST API Design</span>
+              <span>Node.js</span><span>Express.js</span><span>Django</span>
+              <span>PostgreSQL</span><span>Firebase</span><span>REST APIs</span>
             </div>
           </div>
 
@@ -224,148 +215,96 @@ const copyEmail = () => {
           </div>
 
           <div className="skills-card">
-            <h3>Architecture & Tools</h3>
+            <h3>Infrastructure & Tools</h3>
             <div className="skills-items">
-              <span>Client–Server</span><span>Git</span><span>GitHub</span>
-              <span>Cursor AI</span><span>GitHub Copilot</span><span>Supabase</span>
+              <span>Vercel</span><span>Git/GitHub</span><span>Supabase</span>
+              <span>Cursor AI</span><span>SEO Optimization</span>
             </div>
-          </div>
-
-          <div className="skills-card">
-            <h3>Security</h3>
-            <div className="skills-items">
-              <span>OWASP Principles</span><span>Auth Flows</span><span>API Security</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= ENGINEERING FOCUS ================= */}
-      <section ref={focusRef} className="content-section focus-section">
-        <h2>Engineering Principles</h2>
-
-        <div className="focus-grid">
-          <div className="focus-card">
-            <h3>Clean Architecture</h3>
-            <p>Prioritizing intentional system structure and readable, maintainable codebases.</p>
-          </div>
-          <div className="focus-card">
-            <h3>Predictable Data Flow</h3>
-            <p>Designing systems with logical data movement to reduce complexity and bugs.</p>
-          </div>
-          <div className="focus-card">
-            <h3>Scalability-Aware Design</h3>
-            <p>Considering performance constraints early to avoid architectural bottlenecks.</p>
-          </div>
-          <div className="focus-card">
-            <h3>Security-Conscious</h3>
-            <p>Implementing safe user input handling and secure authentication flows by default.</p>
-          </div>
-          <div className="focus-card">
-            <h3>Production-Oriented</h3>
-            <p>Iterating on real-world reliability rather than assuming ideal scenarios.</p>
           </div>
         </div>
       </section>
 
       {/* ================= PROJECTS ================= */}
       <section ref={projectsRef} className="content-section projects-section">
-        <h2>Projects</h2>
+        <h2>Live Products & Projects</h2>
         <div className="projects-list">
-          {/* Project 1 */}
+          
+          {/* NoreaTools */}
+          <div className="project-card">
+            <div className="project-header">
+              <h3>NoreaTools</h3>
+              <span className="project-tag">Live Product</span>
+            </div>
+            <p className="project-desc">
+              A suite of online productivity and PDF tools. Built independently from the ground up, handling both the technical roadmap and product development.
+            </p>
+            <a href="https://noreatools.noreatrix.com" target="_blank" rel="noopener noreferrer" className="project-link">
+              Visit NoreaTools →
+            </a>
+          </div>
+
+          {/* The SBK Dance */}
+          <div className="project-card">
+            <div className="project-header">
+              <h3>The SBK Dance</h3>
+              <span className="project-tag">Client Application</span>
+            </div>
+            <p className="project-desc">
+              Independently designed, developed, deployed, and currently maintaining the digital platform for a dance organization, ensuring high uptime and performance.
+            </p>
+            <a href="https://thesbkdance.com" target="_blank" rel="noopener noreferrer" className="project-link">
+              Visit Site →
+            </a>
+          </div>
+
+          {/* Accd Bazaar */}
           <div className="project-card">
             <div className="project-header">
               <h3>Accd Bazaar</h3>
-              <span className="project-tag">Full-Stack Product</span>
+              <span className="project-tag">Full-Stack System</span>
             </div>
             <p className="project-desc">
-              A scalable circular marketplace platform supporting dynamic listings 
-              and structured user interactions.
+              A scalable circular marketplace platform supporting dynamic listings and structured client-server data flow.
             </p>
-            <ul className="project-points">
-              <li>Designed backend models and REST APIs for business logic</li>
-              <li>Implemented responsive frontend using React and modern UI practices</li>
-              <li>Structured client-server data flow for scalability</li>
-            </ul>
             <a href="https://github.com/dumpalajeevankumar1/Web-application" target="_blank" rel="noopener noreferrer" className="project-link">
               GitHub →
             </a>
           </div>
 
-          {/* Project 2 */}
+          {/* City Intelligence */}
           <div className="project-card">
             <div className="project-header">
               <h3>City Intelligence Dashboard</h3>
-              <span className="project-tag">Google Hackathon Finalist</span>
+              <span className="project-tag">Hackathon Finalist</span>
             </div>
             <p className="project-desc">
-              A real-time civic intelligence system for monitoring traffic and incidents 
-              via geospatial insights.
+              A real-time civic intelligence system for monitoring traffic via geospatial insights, utilizing Firebase and Google Maps API.
             </p>
-            <ul className="project-points">
-              <li>Integrated Firebase for real-time updates</li>
-              <li>Implemented Google Maps API for geospatial insights</li>
-              <li>Designed rapid data-refresh architecture</li>
-            </ul>
             <a href="https://github.com/dumpalajeevankumar1/scamps" target="_blank" rel="noopener noreferrer" className="project-link">
               GitHub →
             </a>
           </div>
-
-          {/* Project 3 */}
-          <div className="project-card">
-            <div className="project-header">
-              <h3>AgroMind</h3>
-              <span className="project-tag">IoT + AI System</span>
-            </div>
-            <p className="project-desc">
-              An AI-enhanced smart farming system collecting sensor data and generating 
-              automated agricultural recommendations.
-            </p>
-            <ul className="project-points">
-              <li>Collected IoT sensor data using ESP8266</li>
-              <li>Processed data with Gemini AI API</li>
-              <li>Generated automated agricultural recommendations</li>
-            </ul>
-            <a href="https://github.com/dumpalajeevankumar1/agromind" target="_blank" rel="noopener noreferrer" className="project-link">
-              GitHub →
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= RESUME ================= */}
-      <section ref={resumeRef} className="content-section resume-section">
-        <div className="resume-box">
-          <h2>Resume</h2>
-          <p className="resume-text">
-            A concise overview of my academic background, technical skills, and 
-            hands-on engineering experience in full-stack and AI systems.
-          </p>
-          <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="resume-button">
-            Download Resume
-          </a>
         </div>
       </section>
 
       {/* ================= CONTACT ================= */}
-        <section ref={contactRef} className="content-section contact-section">
+      <section ref={contactRef} className="content-section contact-section">
         <h2>Let’s Connect</h2>
         <div className="contact-grid">
           <div className="contact-card">
-            <h3>Contact</h3>
+            <h3>Contact Details</h3>
             
-            {/* Standard Mailto Link */}
-            <p>
-              <strong>Email:</strong>{" "}
-              <a 
-                href="mailto:jeevankumar082005@gmail.com"
-                className="email-link"
-                title="Open in mail app"
-              >
-                jeevankumar082005@gmail.com
-              </a>
-            </p>
+            <div className="email-copy-wrapper">
+              <p>
+                <strong>Email:</strong>{" "}
+                <a href="mailto:jeevankumar082005@gmail.com" className="email-link">
+                  jeevankumar082005@gmail.com
+                </a>
+              </p>
+              <button onClick={copyEmail} className="copy-btn">
+                {copied ? "Copied!" : "Copy Email"}
+              </button>
+            </div>
 
             <p>
               <strong>GitHub:</strong>{" "}
@@ -385,10 +324,11 @@ const copyEmail = () => {
           <div className="contact-card highlight">
             <h3>Hire Me</h3>
             <p>
-              I am seeking opportunities as a <strong>Software Developer</strong> or 
-              <strong> Full-Stack Intern</strong>, focusing on backend systems and 
-              AI product development.
+              I am seeking opportunities as a <strong>Software Developer</strong> or <strong>Full-Stack Intern</strong>, focusing on scalable backend systems, cloud deployment, and AI product development.
             </p>
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="resume-button mt-4 inline-block">
+              Download Resume
+            </a>
           </div>
         </div>
       </section>
