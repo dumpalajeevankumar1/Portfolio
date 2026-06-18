@@ -34,7 +34,7 @@ html, body {
 .matrix-bg-container {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: -1; 
+  z-index: 0; 
   pointer-events: none; 
 }
 
@@ -83,6 +83,8 @@ html, body {
   max-width: 1100px;
   margin: 0 auto;
   padding: clamp(5rem, 10vh, 7rem) clamp(1.5rem, 4vw, 3rem);
+  position: relative; /* ADD THIS */
+  z-index: 1;
 }
 
 .content-section h2 {
@@ -94,7 +96,7 @@ html, body {
 }
 
 /* ================= HERO ================= */
-.matrix-hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+.matrix-hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 1; }
 .matrix-content { position: relative; z-index: 1; }
 .generated-name { font-size: 3.8rem; font-weight: 800; letter-spacing: 0.08em; color: var(--accent-blue); text-shadow: 0 0 18px rgba(79, 163, 255, 0.35); }
 .generated-subtitle { margin-top: 1.2rem; font-size: 1.1rem; letter-spacing: 0.28em; color: #9bdcff; text-transform: uppercase; }
