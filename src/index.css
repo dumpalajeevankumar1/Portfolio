@@ -4,7 +4,7 @@
 :root {
   --bg-dark: #050505;
   --text-main: #ffffff;
-  --text-muted: #a0aab2; /* Slightly cooler, more professional grey */
+  --text-muted: #a0aab2;
   --accent-blue: #4fa3ff;
   --accent-green: #00ff9c;
   
@@ -60,7 +60,7 @@ html, body {
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-top: 1px solid var(--glass-highlight);
-  border-radius: 24px; /* Sleeker, rounder corners */
+  border-radius: 24px; 
   padding: 2.5rem;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.4s ease, box-shadow 0.4s ease;
 }
@@ -73,7 +73,7 @@ html, body {
 
 .grid-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2.5rem;
   max-width: 1100px;
   margin: 0 auto;
@@ -83,17 +83,17 @@ html, body {
 .content-section {
   max-width: 1100px;
   margin: 0 auto;
-  padding: clamp(6rem, 12vh, 8rem) clamp(1.5rem, 4vw, 3rem);
+  padding: clamp(5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem);
   position: relative; 
   z-index: 1;
 }
 
-/* Gradient Headers */
+/* Fluid Gradient Headers - Prevents awkward mobile word wrapping */
 .gradient-text {
   text-align: center;
-  font-size: 2.6rem;
+  font-size: clamp(1.8rem, 6vw, 2.6rem); /* Fluid scaling */
   font-weight: 800;
-  margin-bottom: 4rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
   letter-spacing: -0.03em;
   background: linear-gradient(135deg, #ffffff 0%, #a0aab2 100%);
   -webkit-background-clip: text;
@@ -101,10 +101,25 @@ html, body {
 }
 
 /* ================= HERO ================= */
-.matrix-hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 1; }
+.matrix-hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; z-index: 1; padding: 0 1rem;}
 .matrix-content { position: relative; z-index: 1; }
-.generated-name { font-size: 4rem; font-weight: 800; letter-spacing: 0.08em; color: var(--accent-blue); text-shadow: 0 0 25px rgba(79, 163, 255, 0.4); }
-.generated-subtitle { margin-top: 1.4rem; font-size: 1.15rem; letter-spacing: 0.3em; color: #9bdcff; text-transform: uppercase; font-weight: 600; }
+
+/* Fluid sizing guarantees the name fits on one line */
+.generated-name { 
+  font-size: clamp(1.8rem, 7vw, 4rem); 
+  font-weight: 800; 
+  letter-spacing: 0.05em; 
+  color: var(--accent-blue); 
+  text-shadow: 0 0 25px rgba(79, 163, 255, 0.4); 
+}
+.generated-subtitle { 
+  margin-top: 1.4rem; 
+  font-size: clamp(0.75rem, 3vw, 1.15rem); 
+  letter-spacing: 0.25em; 
+  color: #9bdcff; 
+  text-transform: uppercase; 
+  font-weight: 600; 
+}
 .gen-letter { display: inline-block; opacity: 0; transform: scale(0.85) translateY(6px); transition: opacity 0.25s ease, transform 0.25s ease; }
 .gen-letter.show { opacity: 1; transform: scale(1) translateY(0); }
 
@@ -118,13 +133,8 @@ html, body {
 .nav-links { display: flex; gap: 2.8rem; list-style: none; margin: 0; padding: 0; }
 .nav-links li { position: relative; font-size: 0.95rem; font-weight: 600; letter-spacing: 0.05em; color: #a0aab2; cursor: pointer; transition: color 0.3s ease; }
 .nav-links li:hover { color: #ffffff; }
-
-.nav-links li::after {
-  content: ""; position: absolute; left: 0; bottom: -6px; width: 0%; height: 2px;
-  background-color: var(--accent-green); transition: width 0.3s ease;
-}
+.nav-links li::after { content: ""; position: absolute; left: 0; bottom: -6px; width: 0%; height: 2px; background-color: var(--accent-green); transition: width 0.3s ease; }
 .nav-links li:hover::after { width: 100%; }
-
 .nav-links .nav-cta { padding: 0.6rem 1.4rem; border-radius: 999px; border: 1px solid rgba(0, 255, 156, 0.4); color: var(--accent-green); transition: all 0.3s; }
 .nav-links .nav-cta::after { display: none; }
 .nav-links .nav-cta:hover { background: rgba(0, 255, 156, 0.15); box-shadow: 0 0 15px rgba(0, 255, 156, 0.2); }
@@ -150,27 +160,31 @@ html, body {
 .profile-image { width: 100%; max-width: 340px; height: 420px; object-fit: cover; border-radius: 20px; border: 1px solid rgba(255,255,255,0.15); position: relative; z-index: 1; }
 @keyframes pulseGlow { 0% { opacity: 0.25; transform: scale(0.98); } 100% { opacity: 0.5; transform: scale(1.02); } }
 
-/* ================= EXPERIENCE (TIMELINE) ================= */
+/* ================= EXPERIENCE (BULLETPROOF TIMELINE) ================= */
 .timeline-container {
   max-width: 900px;
   margin: 0 auto;
   position: relative;
-  padding-left: 2.5rem;
+  padding-left: 35px; /* Creates inner space for the cards */
+  margin-left: 10px;  /* Prevents line from hitting screen edge on mobile */
 }
-/* The Vertical Line */
+
+/* The Vertical Line - pinned to the left of the container */
 .timeline-container::before {
-  content: ''; position: absolute;
-  top: 0; bottom: 0; left: 8px; width: 2px;
+  content: ''; 
+  position: absolute;
+  top: 0; bottom: 0; left: 0; width: 2px;
   background: linear-gradient(to bottom, var(--accent-green), rgba(0, 255, 156, 0.1));
   opacity: 0.4;
 }
+
 .timeline-item { position: relative; margin-bottom: 3.5rem; }
 .timeline-item:last-child { margin-bottom: 0; }
 
-/* The Timeline Dots */
+/* The Timeline Dots - pulled back perfectly across the padding to sit on the line */
 .timeline-dot {
   position: absolute;
-  left: -2.85rem; 
+  left: -43px; /* -35px (padding) - 8px (half of 16px dot) = -43px */
   top: 2.8rem;
   width: 16px; height: 16px;
   border-radius: 50%;
@@ -184,78 +198,52 @@ html, body {
 
 .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 1.2rem; }
 .exp-titles { display: flex; flex-direction: column; gap: 0.3rem; }
-.exp-titles h3 { font-size: 1.45rem; margin: 0; color: #fff; font-weight: 700; }
+.exp-titles h3 { font-size: clamp(1.2rem, 4vw, 1.45rem); margin: 0; color: #fff; font-weight: 700; }
 .exp-company { color: var(--accent-blue); font-weight: 600; font-size: 1.05rem; }
 .exp-date { background: rgba(0, 255, 156, 0.1); color: var(--accent-green); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; border: 1px solid rgba(0, 255, 156, 0.25); }
 .exp-desc { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.8rem; font-size: 1.05rem; }
 
-/* Mini Tech Badges */
 .exp-tech-stack { display: flex; flex-wrap: wrap; gap: 0.6rem; }
 .tech-badge { font-size: 0.8rem; font-weight: 600; padding: 0.4rem 0.8rem; border-radius: 8px; background: rgba(255, 255, 255, 0.04); color: #cfcfcf; border: 1px solid rgba(255, 255, 255, 0.1); }
 
-/* ================= SKILLS ("NEW PAGE" LAYOUT) ================= */
-.skills-section {
-  max-width: 100%; /* Break out of normal container */
-  padding: 0;
-}
+/* ================= SKILLS ================= */
+.skills-section { max-width: 100%; padding: 0; }
 .skills-page-wrapper {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(6rem, 12vh, 8rem) clamp(1.5rem, 4vw, 3rem);
+  min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  padding: clamp(5rem, 10vh, 8rem) clamp(1rem, 4vw, 3rem);
   background: radial-gradient(circle at center, rgba(0, 255, 156, 0.03) 0%, transparent 70%);
 }
-.skills-grid-layout { 
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-  max-width: 1200px;
-  gap: 3rem;
-}
+.skills-grid-layout { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); max-width: 1200px; gap: 2.5rem; }
 .skills-card h3 { font-size: 1.4rem; margin-top: 0; margin-bottom: 2rem; text-align: center; color: #fff; font-weight: 800; }
 .skills-items { display: flex; flex-wrap: wrap; gap: 0.9rem; justify-content: center; }
-
-/* Upgraded Skill Pills */
-.skill-pill {
-  padding: 0.7rem 1.2rem;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cfcfcf;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  cursor: default;
-}
-.skill-pill:hover {
-  border-color: var(--accent-green);
-  color: var(--bg-dark); 
-  background: var(--accent-green);
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 10px 25px rgba(0, 255, 156, 0.3);
-}
+.skill-pill { padding: 0.7rem 1.2rem; border-radius: 10px; font-size: 0.9rem; font-weight: 600; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); color: #cfcfcf; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: default; }
+.skill-pill:hover { border-color: var(--accent-green); color: var(--bg-dark); background: var(--accent-green); transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 25px rgba(0, 255, 156, 0.3); }
 
 /* ================= CARDS (SERVICES/PROJECTS) ================= */
-.glass-card h3 { font-size: 1.4rem; margin-top: 0; margin-bottom: 1.2rem; font-weight: 800; color: #fff; }
+.glass-card h3 { font-size: clamp(1.2rem, 4vw, 1.4rem); margin-top: 0; margin-bottom: 1.2rem; font-weight: 800; color: #fff; }
 .glass-card p { color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
 
-.project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem; }
+.project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem; flex-wrap: wrap; gap: 0.5rem; }
 .project-tag { font-size: 0.8rem; font-weight: 600; padding: 0.4rem 0.9rem; border-radius: 999px; background: rgba(0,255,156,0.1); color: var(--accent-green); border: 1px solid rgba(0,255,156,0.3); }
-.project-link { font-size: 0.95rem; font-weight: 700; color: #fff; text-decoration: none; display: inline-block; margin-top: 1.5rem; transition: color 0.2s; }
-.project-link:hover { color: var(--accent-green); }
+
+/* Upgraded Project Link Buttons */
+.project-link { 
+  font-size: 0.9rem; font-weight: 700; color: #fff; text-decoration: none; display: inline-flex; align-items: center;
+  margin-top: 1.5rem; padding: 0.6rem 1.2rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.03); transition: all 0.3s ease; 
+}
+.project-link:hover { color: var(--bg-dark); background: var(--accent-green); border-color: var(--accent-green); transform: translateX(5px); box-shadow: 0 5px 15px rgba(0, 255, 156, 0.3); }
 
 /* ================= CONTACT & EMAIL ================= */
 .contact-grid { max-width: 950px; }
 .contact-card a { color: #fff; text-decoration: none; transition: color 0.2s ease; font-weight: 500; }
 .contact-card a:hover { color: var(--accent-green); }
-
 .highlight-card { border-color: rgba(0, 255, 156, 0.4); background: linear-gradient(150deg, rgba(0, 255, 156, 0.05), rgba(0, 0, 0, 0.4)); }
 
 .email-copy-wrapper { margin-bottom: 1rem; }
 .email-copy-wrapper p { margin-bottom: 0; display: flex; align-items: center; flex-wrap: wrap; font-size: 1.05rem; color: #fff; }
-
 .interactable { cursor: pointer; color: var(--accent-blue) !important; border-bottom: 1px dashed rgba(79, 163, 255, 0.5); transition: all 0.2s ease; font-weight: 600; }
 .interactable:hover { color: var(--accent-green) !important; border-bottom-color: var(--accent-green); }
-
 .copied-text { font-size: 0.9rem; font-weight: 700; color: var(--accent-green); margin-left: 12px; animation: fadeInOut 2s forwards ease-in-out; }
 
 @keyframes fadeInOut {
@@ -265,7 +253,15 @@ html, body {
   100% { opacity: 0; transform: translateX(5px); }
 }
 
-.resume-button { padding: 1rem 2.2rem; border-radius: 999px; background: var(--accent-green); color: #000; font-size: 1rem; font-weight: 800; text-decoration: none; display: inline-block; transition: transform 0.3s ease, box-shadow 0.3s ease; margin-top: 1.5rem; }
+/* Upgraded Resume Button */
+.resume-button { 
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 1rem 2.5rem; border-radius: 999px; 
+  background: linear-gradient(135deg, var(--accent-green), #00cc7d); 
+  color: #000; font-size: 1.05rem; font-weight: 800; text-decoration: none; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease; margin-top: 1.5rem; 
+  box-shadow: 0 4px 15px rgba(0, 255, 156, 0.2);
+}
 .resume-button:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0, 255, 156, 0.4); color: #000; }
 
 /* ================= MOBILE RESPONSIVE ================= */
@@ -277,16 +273,9 @@ html, body {
   .about-section { flex-direction: column; text-align: center; gap: 4rem; min-height: unset; }
   .about-left .gradient-text { text-align: center; }
   .about-right { width: 100%; min-height: 280px; }
-  
-  .timeline-container { padding-left: 1.5rem; }
-  .timeline-container::before { left: 0; }
-  .timeline-dot { left: -3.05rem; }
-  .exp-header { flex-direction: column; gap: 1rem; }
 }
 
 @media (max-width: 768px) {
-  .generated-name { font-size: 2.6rem; letter-spacing: 0.05em; }
-  .generated-subtitle { font-size: 0.95rem; letter-spacing: 0.2em; }
   .mobile-menu-btn { display: block; }
   .nav-links {
     position: fixed; top: 72px; right: 0; width: 100%; max-width: 320px; height: calc(100vh - 72px);
@@ -297,13 +286,15 @@ html, body {
   }
   .nav-links-mobile-open { transform: translateX(0); }
   .nav-links li { font-size: 1.2rem; width: 100%; padding: 0.5rem 0; }
+  
+  .glass-card { padding: 1.8rem; }
+  .exp-header { flex-direction: column; gap: 1rem; }
+  .timeline-dot { top: 2.2rem; }
 }
 
 @media (max-width: 480px) {
-  .content-section { padding: 4rem 1.2rem; }
-  .generated-name { font-size: 2.2rem; }
-  .generated-subtitle { font-size: 0.8rem; }
   .about-section { gap: 3rem; }
   .profile-image { max-width: 280px; height: 360px; }
   .grid-layout, .skills-grid-layout, .contact-grid { grid-template-columns: 1fr; }
+  .resume-button { width: 100%; } /* Stretch button on mobile */
 }
