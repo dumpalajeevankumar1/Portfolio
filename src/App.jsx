@@ -213,7 +213,7 @@ export default function App() {
             <h3>AI & Generative AI</h3>
             <div className="skills-items">
               <span>LLM Integration</span><span>Prompt Engineering</span>
-              <span>OpenAI (ChatGPT) API</span><span>Google Gemini API</span><span>Vertex AI</span>
+              <span>OpenAI (ChatGPT)</span><span>Google Gemini API</span><span>Vertex AI</span>
             </div>
           </div>
 
@@ -230,7 +230,7 @@ export default function App() {
           <div className="skills-card">
             <h3>Architecture & Methods</h3>
             <div className="skills-items">
-              <span>Client–Server Auth</span><span>Git & GitHub</span>
+              <span>Client–Server Architecture</span><span>Git & GitHub</span>
               <span>Agile Methodologies</span><span>CI/CD Workflows</span>
             </div>
           </div>
@@ -251,7 +251,6 @@ export default function App() {
         <h2>Live Products & Projects</h2>
         <div className="projects-list">
           
-          {/* NoreaTools */}
           <div className="project-card">
             <div className="project-header">
               <h3>NoreaTools</h3>
@@ -265,7 +264,6 @@ export default function App() {
             </a>
           </div>
 
-          {/* The SBK Dance */}
           <div className="project-card">
             <div className="project-header">
               <h3>The SBK Dance</h3>
@@ -279,7 +277,6 @@ export default function App() {
             </a>
           </div>
 
-          {/* Accd Bazaar */}
           <div className="project-card">
             <div className="project-header">
               <h3>Accd Bazaar</h3>
@@ -293,7 +290,6 @@ export default function App() {
             </a>
           </div>
 
-          {/* City Intelligence */}
           <div className="project-card">
             <div className="project-header">
               <h3>City Intelligence Dashboard</h3>
@@ -319,13 +315,16 @@ export default function App() {
             <div className="email-copy-wrapper">
               <p>
                 <strong>Email:</strong>{" "}
-                <a href="mailto:jeevankumar082005@gmail.com" className="email-link">
+                <span 
+                  className="email-link interactable"
+                  onClick={copyEmail}
+                  onDoubleClick={() => window.location.href = "mailto:jeevankumar082005@gmail.com"}
+                  title="Click to copy, Double-click to open mail app"
+                >
                   jeevankumar082005@gmail.com
-                </a>
+                </span>
+                {copied && <span className="copied-text">Copied!</span>}
               </p>
-              <button onClick={copyEmail} className="copy-btn">
-                {copied ? "Copied!" : "Copy Email"}
-              </button>
             </div>
 
             <p>
