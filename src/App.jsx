@@ -9,7 +9,7 @@ const EXPERIENCE_DATA = [
     role: "Full-Stack Developer Intern",
     company: "Inteleforge Limited",
     date: "Jan 2026 – Present",
-    desc: "Contributed to end-to-end product development and deployment pipelines. Designed scalable client–server architecture using React & Node.js, implemented secure authentication, and integrated AI-powered workflows into production systems.",
+    desc: "Contributing to end-to-end product development, including the architecture and deployment of platforms like The SBK Dance. Designing scalable client–server systems using React & Node.js, implementing secure authentication, and integrating AI-powered workflows into production systems.",
     tech: ["React.js", "Node.js", "AI Workflows", "System Architecture"]
   },
   {
@@ -20,11 +20,11 @@ const EXPERIENCE_DATA = [
     tech: ["Next.js", "Cloud Infra", "Product Dev", "SEO"]
   },
   {
-    role: "Freelance Developer",
-    company: "Client Solutions",
-    date: "Mar 2025 – Present",
-    desc: "Developed, deployed, and currently maintain production applications like The SBK Dance from the ground up. Architected and delivered several real-world projects under NDA client agreements, focusing on system architecture, performance optimization, and search visibility.",
-    tech: ["Full-Stack", "Performance Optimization", "Client Comm"]
+    role: "Full-Stack Developer & Marketer",
+    company: "Matrimony in India",
+    date: "Mar 2025 – Jan 2026",
+    desc: "Developed a comprehensive full-stack web platform from the ground up. Managed digital advertising campaigns and implemented technical SEO strategies to drive targeted traffic, improve search rankings, and boost overall user acquisition.",
+    tech: ["Full-Stack Web", "SEO Strategy", "Ad Management", "Analytics"]
   },
 ];
 
@@ -69,8 +69,8 @@ const SKILLS_DATA = [
     items: ["Client–Server Arch", "Git & GitHub", "Agile", "CI/CD Workflows"],
   },
   {
-    category: "Security & Tools",
-    items: ["OWASP Principles", "Auth Flows", "API Testing", "Debugging"],
+    category: "Security & Marketing",
+    items: ["OWASP Principles", "Auth Flows", "Technical SEO", "Ad Management"],
   },
 ];
 
@@ -84,8 +84,8 @@ const PROJECTS_DATA = [
   },
   {
     title: "The SBK Dance",
-    tag: "Client Application",
-    desc: "Independently designed, developed, deployed, and currently maintaining the digital platform for a dance organization, ensuring high uptime and performance.",
+    tag: "Inteleforge Project",
+    desc: "Designed, developed, deployed, and currently maintaining the digital platform for a dance organization, ensuring high uptime and performance.",
     link: "https://thesbkdance.com",
     linkText: "Visit Site →",
   },
@@ -199,7 +199,7 @@ export default function App() {
           <ul className={`nav-links ${isMobileMenuOpen ? "nav-links-mobile-open glass-panel" : ""}`}>
             <li onClick={() => scrollToSection(profileRef)}>About</li>
             <li onClick={() => scrollToSection(experienceRef)}>Experience</li>
-            <li onClick={() => scrollToSection(skillsRef)}>Stack</li>
+            <li onClick={() => scrollToSection(skillsRef)}>Skills</li>
             <li onClick={() => scrollToSection(projectsRef)}>Projects</li>
             <li className="nav-cta" onClick={() => scrollToSection(contactRef)}>Contact</li>
           </ul>
@@ -209,7 +209,7 @@ export default function App() {
       {/* ================= ABOUT ================= */}
       <section ref={profileRef} className="content-section about-section reveal-on-scroll">
         <div className="about-left">
-          <h2>About</h2>
+          <h2 className="gradient-text">About</h2>
           <p className="about-lead">
             I am a developer who enjoys building products from the ground up, approaching software as an <span className="text-highlight">engineered system</span> rather than just a collection of features.
           </p>
@@ -229,7 +229,7 @@ export default function App() {
 
       {/* ================= EXPERIENCE (TIMELINE) ================= */}
       <section ref={experienceRef} className="content-section experience-section reveal-on-scroll">
-        <h2>Professional Experience</h2>
+        <h2 className="gradient-text">Professional Experience</h2>
         <div className="timeline-container">
           {EXPERIENCE_DATA.map((exp, idx) => (
             <div key={idx} className="timeline-item glass-card">
@@ -252,9 +252,28 @@ export default function App() {
         </div>
       </section>
 
+      {/* ================= SKILLS (FULL PAGE LAYOUT) ================= */}
+      <section ref={skillsRef} className="content-section skills-section reveal-on-scroll">
+        <div className="skills-page-wrapper">
+          <h2 className="gradient-text">Skills & Abilities</h2>
+          <div className="grid-layout skills-grid-layout">
+            {SKILLS_DATA.map((skillGroup, idx) => (
+              <div key={idx} className="glass-card skills-card">
+                <h3>{skillGroup.category}</h3>
+                <div className="skills-items">
+                  {skillGroup.items.map((item, i) => (
+                    <span key={i} className="skill-pill">{item}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ================= SERVICES ================= */}
       <section ref={servicesRef} className="content-section services-section reveal-on-scroll">
-        <h2>What I Build</h2>
+        <h2 className="gradient-text">What I Build</h2>
         <div className="grid-layout">
           {SERVICES_DATA.map((service, idx) => (
             <div key={idx} className="glass-card service-card">
@@ -265,26 +284,9 @@ export default function App() {
         </div>
       </section>
 
-      {/* ================= SKILLS ================= */}
-      <section ref={skillsRef} className="content-section skills-section reveal-on-scroll">
-        <h2>Skills & Abilities</h2>
-        <div className="grid-layout skills-grid-layout">
-          {SKILLS_DATA.map((skillGroup, idx) => (
-            <div key={idx} className="glass-card skills-card">
-              <h3>{skillGroup.category}</h3>
-              <div className="skills-items">
-                {skillGroup.items.map((item, i) => (
-                  <span key={i} className="skill-pill">{item}</span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ================= PROJECTS ================= */}
       <section ref={projectsRef} className="content-section projects-section reveal-on-scroll">
-        <h2>Live Products & Projects</h2>
+        <h2 className="gradient-text">Live Products & Projects</h2>
         <div className="grid-layout">
           {PROJECTS_DATA.map((project, idx) => (
             <div key={idx} className="glass-card project-card">
@@ -303,7 +305,7 @@ export default function App() {
 
       {/* ================= CONTACT ================= */}
       <section ref={contactRef} className="content-section contact-section reveal-on-scroll">
-        <h2>Let’s Connect</h2>
+        <h2 className="gradient-text">Let’s Connect</h2>
         <div className="grid-layout contact-grid">
           <div className="glass-card contact-card">
             <h3>Contact Details</h3>
