@@ -187,38 +187,60 @@ export default function App() {
 
       {/* ================= TECHNICAL STACK ================= */}
       <section ref={skillsRef} className="content-section skills-section">
-        <h2>Technical Stack</h2>
+        <h2>Skills & Abilities</h2>
 
         <div className="skills-grid">
+          {/* Card 1: Programming & Web */}
           <div className="skills-card">
-            <h3>Web Development</h3>
+            <h3>Programming & Web</h3>
             <div className="skills-items">
-              <span>React.js</span><span>Next.js</span><span>TypeScript</span>
-              <span>JavaScript</span><span>HTML/CSS</span>
+              <span>Python</span><span>TypeScript</span><span>JavaScript</span>
+              <span>React.js</span><span>HTML/CSS</span>
             </div>
           </div>
 
+          {/* Card 2: Backend & APIs */}
           <div className="skills-card">
             <h3>Backend & Data</h3>
             <div className="skills-items">
               <span>Node.js</span><span>Express.js</span><span>Django</span>
-              <span>PostgreSQL</span><span>Firebase</span><span>REST APIs</span>
+              <span>Firebase</span><span>REST API Development</span>
             </div>
           </div>
 
+          {/* Card 3: AI & Generative AI */}
           <div className="skills-card">
             <h3>AI & Generative AI</h3>
             <div className="skills-items">
-              <span>OpenAI (ChatGPT)</span><span>Google Gemini API</span>
-              <span>Vertex AI</span><span>Prompt Engineering</span>
+              <span>LLM Integration</span><span>Prompt Engineering</span>
+              <span>OpenAI (ChatGPT) API</span><span>Google Gemini API</span><span>Vertex AI</span>
             </div>
           </div>
 
+          {/* Card 4: AI Dev Tools */}
           <div className="skills-card">
-            <h3>Infrastructure & Tools</h3>
+            <h3>AI-Assisted Dev Tools</h3>
             <div className="skills-items">
-              <span>Vercel</span><span>Git/GitHub</span><span>Supabase</span>
-              <span>Cursor AI</span><span>SEO Optimization</span>
+              <span>GitHub Copilot</span><span>Cursor AI</span><span>Claude AI</span>
+              <span>Google AI Studio</span><span>Supabase</span>
+            </div>
+          </div>
+
+          {/* Card 5: Architecture & Methodologies */}
+          <div className="skills-card">
+            <h3>Architecture & Methods</h3>
+            <div className="skills-items">
+              <span>Client–Server Auth</span><span>Git & GitHub</span>
+              <span>Agile Methodologies</span><span>CI/CD Workflows</span>
+            </div>
+          </div>
+
+          {/* Card 6: Security & Tools */}
+          <div className="skills-card">
+            <h3>Security & Tools</h3>
+            <div className="skills-items">
+              <span>OWASP Principles</span><span>Auth Flows</span>
+              <span>API Testing</span><span>Debugging Tools</span>
             </div>
           </div>
         </div>
